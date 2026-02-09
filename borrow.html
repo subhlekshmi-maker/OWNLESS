@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Borrow Items</title>
+</head>
+<body>
+  <h1>Borrow Items</h1>
+  <p>Browse clothes, books, essentials</p>
+
+  <button onclick="goHome()">Back</button>
+
+  <script>
+    function goHome() {
+      window.location.href = "home.html";
+    }
+  </script>
+  <script type="module">
+  import { requireAuth } from "./src/auth.js";
+  requireAuth();
+</script>
+<script type="module">
+  import { loadItems } from "./src/items.js";
+
+  const items = await loadItems("borrow");
+  console.log(items); // replace with UI render
+</script>
+
+</body>
+</html>

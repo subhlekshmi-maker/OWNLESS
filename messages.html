@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OWN/LESS - Messages</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="messages-container">
+        <!-- Header -->
+        <header class="dashboard-header">
+            <div class="header-left">
+                <div class="header-logo-circle">
+                    <svg class="header-logo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"
+                            fill="#9333ea" />
+                    </svg>
+                </div>
+                <div class="header-brand">
+                    <h1 class="header-brand-name">OWN/LESS</h1>
+                    <p class="header-brand-subtitle">VIT Exchange</p>
+                </div>
+            </div>
+            <nav class="header-nav">
+                <a href="home.html" class="nav-item">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3 7V5C3 3.9 3.9 3 5 3H19C20.1 3 21 3.9 21 5V7" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M3 7L12 13L21 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <path d="M3 7V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V7" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    <span>Browse</span>
+                </a>
+                <a href="messages.html" class="nav-item active messages-nav">
+                    <div class="nav-icon-wrapper">
+                        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M21 15C21 15.5304 20.7893 16.0391 20.4142 16.4142C20.0391 16.7893 19.5304 17 19 17H7L3 21V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H19C19.5304 3 20.0391 3.21071 20.4142 3.58579C20.7893 3.96086 21 4.46957 21 5V15Z"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        <span class="badge">1</span>
+                    </div>
+                    <span>Messages</span>
+                </a>
+                <a href="profile.html" class="nav-item">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        <circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                    <span>Profile</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <path d="M12 5L19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </a>
+            </nav>
+        </header>
+
+        <!-- Main Content -->
+        <main class="messages-main">
+            <div class="messages-card">
+                <h2 class="messages-title">Messages</h2>
+
+                <!-- Search Bar -->
+                <div class="messages-search-wrapper">
+                    <svg class="messages-search-icon" viewBox="0 0 24 24" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <path d="M21 21L16.65 16.65" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                    <input type="text" id="messages-search" class="messages-search-input"
+                        placeholder="Search conversations...">
+                </div>
+
+                <!-- Message List -->
+                <div class="messages-list" id="conversations-list">
+                </div>
+            </div>
+        </main>
+
+        <!-- Help Icon -->
+        <button class="help-icon">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="12" r="10" fill="currentColor" />
+                <path
+                    d="M9.09 9C9.3251 8.33167 9.78915 7.76811 10.4 7.40913C11.0108 7.05016 11.7289 6.91894 12.4272 7.03871C13.1255 7.15849 13.7588 7.52152 14.2151 8.06353C14.6713 8.60553 14.9211 9.29152 14.92 10C14.92 12 11.92 13 11.92 13"
+                    stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M12 17H12.01" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+        </button>
+    </div>
+    <script type="module">
+        import { requireAuth, getCurrentUser } from "./src/auth.js";
+        import { loadConversations } from "./src/messages.js";
+
+        await requireAuth();
+        const currentUser = await getCurrentUser();
+
+        const listEl = document.getElementById("conversations-list");
+        const searchEl = document.getElementById("messages-search");
+
+        function render(list, filter) {
+            listEl.innerHTML = "";
+            const lower = (filter || "").toLowerCase();
+
+            // Basic grouping by item_id and other_user_id to simulate conversations
+            // This is a client-side grouping because the backend returns raw messages
+            const conversations = {};
+
+            list.forEach(msg => {
+                const amISender = msg.sender_id === currentUser.id;
+                const otherId = amISender ? msg.receiver_id : msg.sender_id;
+                const otherName = (amISender ? msg.receiver?.username : msg.sender?.username) || "User";
+                const key = `${msg.item_id}-${otherId}`;
+
+                // Keep the latest message for this conversation pair
+                if (!conversations[key]) {
+                    conversations[key] = {
+                        ...msg,
+                        otherId,
+                        otherName
+                    };
+                }
+            });
+
+            Object.values(conversations)
+                .filter(c => !lower || (c.items?.title || "").toLowerCase().includes(lower) || (c.otherName || "").toLowerCase().includes(lower))
+                .forEach(c => {
+                    const preview = c.text;
+                    const time = new Date(c.created_at).toLocaleString();
+                    const div = document.createElement("div");
+                    div.className = "message-item";
+                    div.addEventListener("click", () => {
+                        const name = encodeURIComponent(c.otherName);
+                        window.location.href = `chat.html?item=${c.item_id}&to=${c.otherId}&name=${name}`;
+                    });
+                    div.innerHTML = `
+              <div class="message-avatar"><span>${(c.otherName[0] || "U").toUpperCase()}</span></div>
+              <div class="message-content">
+                <div class="message-username">${c.otherName} <span style="font-size:0.8em;color:#888;">for ${c.items?.title || "Item"}</span></div>
+                <div class="message-preview">${preview}</div>
+                <div class="message-timestamp">${time}</div>
+              </div>
+            `;
+                    listEl.appendChild(div);
+                });
+        }
+
+        const conversations = await loadConversations();
+        render(conversations, "");
+
+        searchEl.addEventListener("input", () => {
+            render(conversations, searchEl.value);
+        });
+    </script>
+
+</body>
+
+</html>

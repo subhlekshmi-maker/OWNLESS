@@ -1,0 +1,49 @@
+create table exchanges (
+  id uuid primary key default gen_random_uuid(),
+
+  item_id uuid not null
+    references items(id) on delete cascade,
+
+  owner_id uuid not null
+    references auth.users(id) on delete cascade,
+
+  other_user_id uuid not null
+    references auth.users(id) on delete cascade,
+
+  -- has each party confirmed the handover?
+  owner_confirmed boolean default false,
+  other_user_confirmed boolean default false,
+
+  -- optional timestamps
+  handover_at timestamp with time zone,
+  return_due_at timestamp with time zone,
+  returned_at timestamp with time zone,
+
+  created_at timestamp with time zone default now()
+);
+
+alter table exchanges enable row level security;
+
+-- Only involved users can view
+create policy "exchanges_select"
+on exchanges
+for select
+using (
+  auth.uid() = owner_id
+  or auth.uid() = other_user_id
+);
+
+-- Either party can confirm
+create policy "exchanges_update"
+on exchanges
+for update
+using (
+  auth.uid() = owner_id
+  or auth.uid() = other_user_id
+);
+
+-- Owner creates exchange
+create policy "exchanges_insert"
+on exchanges
+for insert
+with check (auth.uid() = owner_id);

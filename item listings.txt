@@ -1,0 +1,48 @@
+create table items (
+  id uuid primary key default gen_random_uuid(),
+
+  title text not null,
+  description text,
+  category text,
+
+  -- what the owner wants to do
+  mode text not null
+    check (mode in ('borrow', 'lend', 'buy', 'sell')),
+
+  price integer,
+
+  owner_id uuid not null
+    references auth.users(id) on delete cascade,
+
+  -- current lifecycle state
+  status text not null default 'available'
+    check (status in ('available', 'reserved', 'borrowed', 'sold')),
+
+  created_at timestamp with time zone default now()
+);
+
+alter table items enable row level security;
+
+-- Anyone logged in can view items
+create policy "items_select"
+on items
+for select
+using (auth.uid() is not null);
+
+-- Only owner can insert
+create policy "items_insert"
+on items
+for insert
+with check (auth.uid() = owner_id);
+
+-- Only owner can update
+create policy "items_update"
+on items
+for update
+using (auth.uid() = owner_id);
+
+-- Only owner can delete
+create policy "items_delete"
+on items
+for delete
+using (auth.uid() = owner_id);

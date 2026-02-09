@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OWN/LESS - Login</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <div class="background">
+    <div class="dots"></div>
+    <div class="container">
+      <div class="login-card">
+        <div class="logo-container">
+          <div class="logo-circle">
+            <svg class="logo-icon" viewBox="0 0 24 24" fill="none">
+              <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"
+                fill="white" />
+            </svg>
+          </div>
+        </div>
+
+        <h1 class="brand-name">OWN/LESS</h1>
+        <p class="tagline">
+          Making sustainability accessible—by making access itself accessible.
+        </p>
+
+        <form class="login-form">
+          <div class="form-group">
+            <label for="email">VIT Student Email</label>
+            <input type="email" id="email" placeholder="your.name@vitstudent.ac.in" required />
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="••••••••" required />
+          </div>
+
+          <button type="button" class="sign-in-btn" onclick="handleAuth()">Sign In</button>
+
+          <div class="divider">
+            <span>or</span>
+          </div>
+
+          <button type="button" class="google-signin-btn" onclick="signInWithGoogle()">
+            <svg class="google-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                fill="#4285F4" />
+              <path
+                d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                fill="#34A853" />
+              <path
+                d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+                fill="#FBBC05" />
+              <path
+                d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+                fill="#EA4335" />
+            </svg>
+            Continue with Google
+          </button>
+
+          <p class="auth-toggle-wrapper" style="margin-top: 20px; text-align: center; font-size: 0.9em; color: #666;">
+            <span id="auth-toggle-text">Don't have an account? <a href="#"
+                style="color: #9333ea; text-decoration: none; font-weight: 600;" onclick="toggleAuthMode()">Sign
+                Up</a></span>
+          </p>
+        </form>
+
+        <p class="platform-desc">VIT-exclusive student exchange platform</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ✅ ONLY ONE SCRIPT, PROPERLY DECLARED -->
+  <script type="module">
+    import { login, signUp, signInWithGoogle } from "./src/auth.js";
+
+    let isLoginMode = true;
+
+    window.toggleAuthMode = () => {
+      isLoginMode = !isLoginMode;
+      const title = document.querySelector(".brand-name");
+      const btn = document.querySelector(".sign-in-btn");
+      const toggleText = document.getElementById("auth-toggle-text");
+
+      if (isLoginMode) {
+        btn.textContent = "Sign In";
+        toggleText.innerHTML = `Don't have an account? <a href="#" onclick="toggleAuthMode()">Sign Up</a>`;
+      } else {
+        btn.textContent = "Sign Up";
+        toggleText.innerHTML = `Already have an account? <a href="#" onclick="toggleAuthMode()">Sign In</a>`;
+      }
+    };
+
+    window.handleAuth = () => {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      if (isLoginMode) {
+        login(email, password);
+      } else {
+        signUp(email, password);
+      }
+    };
+
+    window.signInWithGoogle = () => {
+      signInWithGoogle();
+    };
+  </script>
+
+
+</body>
+
+</html>

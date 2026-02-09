@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sell / Lend Item</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <h1>List Your Item</h1>
+  <p>Add an item you want to sell or lend</p>
+
+  <!-- FORM -->
+  <div>
+    <label>Title</label><br />
+    <input type="text" id="title" placeholder="Formal Shirt" /><br /><br />
+
+    <label>Description</label><br />
+    <textarea id="description" placeholder="Condition, size, etc."></textarea><br /><br />
+
+    <label>Category</label><br />
+    <select id="category">
+      <option value="Fashion">Fashion</option>
+      <option value="Books">Books</option>
+      <option value="Electronics">Electronics</option>
+      <option value="Essentials">Essentials</option>
+    </select><br /><br />
+
+    <label>Price (₹)</label><br />
+    <input type="number" id="price" /><br /><br />
+
+    <label>Mode</label><br />
+    <button onclick="setMode('sell')">Sell</button>
+    <button onclick="setMode('lend')">Lend</button>
+
+    <p id="modeText">Selected: sell</p>
+
+    <br />
+    <button onclick="submitItem()">List Item</button>
+    <button onclick="goHome()">Back</button>
+  </div>
+
+  <!-- LOGIC -->
+  <script type="module">
+    import { supabase } from "./supabaseClient.js";
+
+    let selectedMode = "sell";
+
+    window.setMode = (mode) => {
+      selectedMode = mode;
+      document.getElementById("modeText").innerText =
+        "Selected: " + mode;
+    };
+
+    window.submitItem = async () => {
+      const title = document.getElementById("title").value;
+      const description = document.getElementById("description").value;
+      const category = document.getElementById("category").value;
+      const price = document.getElementById("price").value;
+
+      if (!title || !description || !price) {
+        alert("Fill all fields");
+        return;
+      }
+
+      const { data: userData, error: userError } =
+        await supabase.auth.getUser();
+
+      if (!userData.user) {
+        alert("Not logged in");
+        return;
+      }
+
+      const { error } = await supabase.from("items").insert({
+        title,
+        description,
+        category,
+        mode: selectedMode,
+        price,
+        owner_id: userData.user.id
+      });
+
+      if (error) {
+        console.error(error);
+        alert(error.message);
+      } else {
+        alert("Item listed successfully!");
+        window.location.href = "home.html";
+      }
+    };
+
+    window.goHome = () => {
+      window.location.href = "home.html";
+    };
+  </script>
+</body>
+</html>

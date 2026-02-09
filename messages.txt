@@ -1,0 +1,33 @@
+create table messages (
+  id uuid primary key default gen_random_uuid(),
+
+  item_id uuid not null
+    references items(id) on delete cascade,
+
+  sender_id uuid not null
+    references auth.users(id) on delete cascade,
+
+  receiver_id uuid not null
+    references auth.users(id) on delete cascade,
+
+  message text not null,
+
+  created_at timestamp with time zone default now()
+);
+
+alter table messages enable row level security;
+
+-- Only sender or receiver can read messages
+create policy "messages_select"
+on messages
+for select
+using (
+  auth.uid() = sender_id
+  or auth.uid() = receiver_id
+);
+
+-- Only sender can send messages
+create policy "messages_insert"
+on messages
+for insert
+with check (auth.uid() = sender_id);

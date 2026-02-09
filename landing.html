@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OWN/LESS - Welcome</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="landing-container" id="landingContainer">
+        <!-- Sign In Button at Top -->
+        <button class="landing-signin-btn" onclick="window.location.href='index.html'">
+            Sign In
+        </button>
+
+        <!-- Main Content -->
+        <div class="landing-content">
+            <h1 class="landing-title">OWN/LESS</h1>
+            <p class="landing-subtitle">VIT Exchange Platform</p>
+        </div>
+
+        <!-- Scroll Down Indicator -->
+        <div class="scroll-indicator">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7 13L12 18L17 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M7 6L12 11L17 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section class="landing-about">
+        <div class="about-content">
+            <h2 class="about-title">Why OWN/LESS?</h2>
+            <div class="about-features">
+                <div class="feature-card">
+                    <div class="feature-icon">♻️</div>
+                    <h3>Sustainable Living</h3>
+                    <p>Reduce waste by sharing and reusing items within the VIT community</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💰</div>
+                    <h3>Save Money</h3>
+                    <p>Borrow what you need instead of buying new. Sell what you don't use</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🤝</div>
+                    <h3>Community First</h3>
+                    <p>Connect with fellow VIT students in a trusted, verified environment</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Easy Exchange</h3>
+                    <p>Simple platform to borrow, lend, buy, and sell items quickly</p>
+                </div>
+            </div>
+            <div class="about-cta">
+                <p class="about-description">
+                    Making sustainability accessible—by making access itself accessible.
+                </p>
+                <button class="cta-button" onclick="window.location.href='index.html'">
+                    Get Started
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Update gradient based on scroll position
+        const container = document.getElementById('landingContainer');
+        const aboutSection = document.querySelector('.landing-about');
+        
+        window.addEventListener('scroll', () => {
+            const scrollPercent = window.scrollY / (window.innerHeight * 0.5);
+            const clampedScroll = Math.min(scrollPercent, 1);
+            
+            // Interpolate from black (#000000) to dark purple (#2d1b4e)
+            const r = Math.floor(0 + (45 * clampedScroll));
+            const g = Math.floor(0 + (27 * clampedScroll));
+            const b = Math.floor(0 + (78 * clampedScroll));
+            
+            container.style.background = `linear-gradient(180deg, #000000 0%, rgb(${r}, ${g}, ${b}) 100%)`;
+        });
+    </script>
+</body>
+</html>
+

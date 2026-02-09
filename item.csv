@@ -1,0 +1,9 @@
+title,description,category,mode,price,owner_id,status
+DSA Textbook,Used for one semester – good condition,Books,borrow,50,d9d705ff-1319-416b-9ece-d260c19c94d8,available
+Formal Shirt,Worn twice for presentations,Fashion,lend,70,d9d705ff-1319-416b-9ece-d260c19c94d8,available
+Scientific Calculator,All buttons working,Electronics,sell,350,d9d705ff-1319-416b-9ece-d260c19c94d8,available
+Yoga Mat,Clean and lightly used,Sports,lend,50,d9d705ff-1319-416b-9ece-d260c19c94d8,available
+Engineering Drawing Kit,Complete set with compass,Essentials,borrow,0,d9d705ff-1319-416b-9ece-d260c19c94d8,available
+Bluetooth Headphones,Good sound quality,Electronics,sell,1200,d9d705ff-1319-416b-9ece-d260c19c94d8,available
+Lab Coat,Size M – clean,Fashion,borrow,100,d9d705ff-1319-416b-9ece-d260c19c94d8,available
+Thermal Flask,Keeps water hot for 6 hrs,Essentials,lend,150,d9d705ff-1319-416b-9ece-d260c19c94d8,available

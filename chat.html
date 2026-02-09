@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OWN/LESS - Chat</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="messages-container">
+    <header class="dashboard-header">
+      <div class="header-left">
+        <div class="header-logo-circle">
+          <svg class="header-logo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" fill="#9333ea"/>
+          </svg>
+        </div>
+        <div class="header-brand">
+          <h1 class="header-brand-name">OWN/LESS</h1>
+          <p class="header-brand-subtitle">Chat</p>
+        </div>
+      </div>
+      <nav class="header-nav">
+        <a href="home.html" class="nav-item"><span>Home</span></a>
+        <a href="messages.html" class="nav-item active messages-nav"><span>Messages</span></a>
+      </nav>
+    </header>
+
+    <main class="messages-main">
+      <div class="messages-card">
+        <h2 class="messages-title" id="chat-title">Chat</h2>
+        <div id="chat-messages" class="chat-messages"></div>
+        <div class="chat-input-row">
+          <input id="chat-input" class="messages-search-input" placeholder="Type a message..." />
+          <button id="chat-send" class="submit-btn">Send</button>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script type="module">
+    import { requireAuth, getCurrentUser } from "./src/auth.js";
+    import { loadMessages, sendMessage } from "./src/messages.js";
+
+    await requireAuth();
+
+    const params = new URLSearchParams(window.location.search);
+    const itemId = params.get("item");
+    const otherUserId = params.get("to");
+    const otherName = params.get("name") || "User";
+
+    const titleEl = document.getElementById("chat-title");
+    const messagesEl = document.getElementById("chat-messages");
+    const inputEl = document.getElementById("chat-input");
+    const sendBtn = document.getElementById("chat-send");
+
+    titleEl.textContent = "Chat with " + otherName;
+
+    async function renderMessages() {
+      const msgs = await loadMessages(itemId, otherUserId);
+      const me = await getCurrentUser();
+      messagesEl.innerHTML = "";
+      msgs.forEach(m => {
+        const div = document.createElement("div");
+        div.className = "chat-message " + (m.sender_id === me.id ? "chat-message-me" : "chat-message-them");
+        div.textContent = m.text;
+        messagesEl.appendChild(div);
+      });
+      messagesEl.scrollTop = messagesEl.scrollHeight;
+    }
+
+    sendBtn.addEventListener("click", async () => {
+      const text = inputEl.value.trim();
+      if (!text) return;
+      await sendMessage(itemId, otherUserId, text);
+      inputEl.value = "";
+      await renderMessages();
+    });
+
+    inputEl.addEventListener("keydown", async (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        sendBtn.click();
+      }
+    });
+
+    await renderMessages();
+  </script>
+</body>
+</html>
+
+
